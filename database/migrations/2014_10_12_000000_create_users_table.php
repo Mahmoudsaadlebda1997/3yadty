@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->enum('user_type', ['DOCTOR', 'PATIENT', 'ADMIN'])->default('ADMIN');
             $table->string('password');
+            $table->string('email')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
