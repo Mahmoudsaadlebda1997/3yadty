@@ -87,7 +87,6 @@ class DoctorController extends Controller
         // Find the doctor by ID
         $doctor = Doctor::findOrFail($id);
         // Validate the request data
-        // Validate the request data
         $request->validate([
             'age' => 'required|integer',
             'name' => 'required',
@@ -129,13 +128,6 @@ class DoctorController extends Controller
             $doctor->image = $imageName;
             $doctor->save();
         }
-
-        // Debugging: Check if the doctor is updated
-        // dd($doctor);
-
-        // Debugging: Check if the route exists
-        // dd(route('doctors.index'));
-
         // Redirect to the index route
         return redirect()->route('doctors.index')->with('success', 'تم تعديل الدكنور بنجاح');
     }

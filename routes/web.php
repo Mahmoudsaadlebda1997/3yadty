@@ -48,6 +48,8 @@ Route::middleware('web')->group(function () {
 
         // Appointments
         Route::resource('appointments', AppointmentController::class);
+
+        Route::get('myAppointments', [AppointmentController::class, 'myAppointments'])->name('myAppointments');
         // Sliders
         Route::resource('sliders', SliderController::class);
 

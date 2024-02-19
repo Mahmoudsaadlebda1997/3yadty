@@ -25,21 +25,21 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Users -->
-                @auth
-                    @if(auth()->user()->user_type == 'ADMIN')
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('users.index') }}">
-                                المستخدمين
-                            </a>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('users.create') }}">
-                                إضافة مستخدم
-                            </a>
-                        </li>
-                        </li>
-                    @endif
-                @endauth
+            {{--                <!-- Users -->--}}
+            {{--                @auth--}}
+            {{--                    @if(auth()->user()->user_type == 'ADMIN')--}}
+            {{--                        <li class="nav-item">--}}
+            {{--                            <a class="nav-link" href="{{ route('users.index') }}">--}}
+            {{--                                المستخدمين--}}
+            {{--                            </a>--}}
+            {{--                        <li class="nav-item">--}}
+            {{--                            <a class="nav-link" href="{{ route('users.create') }}">--}}
+            {{--                                إضافة مستخدم--}}
+            {{--                            </a>--}}
+            {{--                        </li>--}}
+            {{--                        </li>--}}
+            {{--                    @endif--}}
+            {{--                @endauth--}}
             <!-- Specialties -->
                 @auth
                     @if(auth()->user()->user_type == 'ADMIN')
@@ -60,43 +60,58 @@
                     @if(auth()->user()->user_type == 'ADMIN')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('doctors.index') }}">
-                                الدكاتره
+                                الاطباء
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('doctors.create') }}">
-                                إضافة دكتور
+                                إضافة طبيب
                             </a>
                         </li>
                     @endif
                 @endauth
-            <!-- Patients -->
+            <!-- My Appointments -->
                 @auth
-                    @if(auth()->user()->user_type == 'ADMIN')
+                    @if(auth()->user()->user_type == 'DOCTOR')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('patients.index') }}">
-                                المرضي
+                            <a class="nav-link" href="{{ route('myAppointments') }}">
+                                حجوزاتي
                             </a>
                         </li>
+                    @endif
+                @endauth
+                <!-- Appointments -->
+                    @auth
+                        @if(auth()->user()->user_type == 'ADMIN')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('appointments.index') }}">
+                                    الحجوزات
+                                </a>
+                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('appointments.create') }}">
+                                إضافة حجز
+                            </a>
+                        </li>
+                        @endif
+                    @endauth
+                    @auth
+                <!-- Patients -->
+                    @auth
+                        @if(auth()->user()->user_type == 'ADMIN')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('patients.index') }}">
+                                    المرضي
+                                </a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('patients.create') }}">
-                                إضافة مريض
-                            </a>
-                        </li>
-                    @endif
-                @endauth
-            <!-- Appointments -->
-                @auth
-                    @if(auth()->user()->user_type == 'DOCTOR' || auth()->user()->user_type == 'ADMIN')
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('appointments.index') }}">
-                                المواعيد
-                            </a>
-                        </li>
-                    @endif
-                @endauth
-                @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('patients.create') }}">
+                                    إضافة مريض
+                                </a>
+                            </li>
+                        @endif
+                    @endauth
                     @if(auth()->user()->user_type == 'ADMIN')
                     <!-- Sliders -->
                         <li class="nav-item">

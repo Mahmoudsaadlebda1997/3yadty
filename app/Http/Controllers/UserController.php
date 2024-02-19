@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Rules\UserTypeEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,6 +28,7 @@ class UserController extends Controller
         // Validate the request data (add validation rules as needed)
         $request->validate([
             'name' => 'required|string',
+            'phone_number' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
         ]);
@@ -55,6 +57,7 @@ class UserController extends Controller
         // Validate the request data (add validation rules as needed)
         $request->validate([
             'name' => 'required|string',
+            'phone_number' => 'required|string',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:8',
         ]);
@@ -82,7 +85,7 @@ class UserController extends Controller
     {
         // Validate the request data
         $request->validate([
-            'email' => 'required|email',
+            'email' => ['required', 'email', new UserTypeEmail],
             'password' => 'required',
         ]);
 

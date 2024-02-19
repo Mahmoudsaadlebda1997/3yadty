@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Patient extends Model
 {
-    protected $fillable = ['name', 'password', 'age'];
+    protected $fillable = ['name', 'age', 'user_id', 'image'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function appointments()
     {

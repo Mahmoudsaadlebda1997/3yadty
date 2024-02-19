@@ -22,6 +22,7 @@ class User extends Authenticatable
         'password',
         'email',
         'phone_number',
+        'user_type',
     ];
 
     /**
@@ -42,4 +43,13 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+    public function doctor()
+    {
+        return $this->hasOne(Doctor::class);
+    }
+
+    public function patient()
+    {
+        return $this->hasOne(Patient::class);
+    }
 }
