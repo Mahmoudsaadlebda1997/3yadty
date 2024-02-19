@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\SpecialtyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome'); // Replace 'dashboard' with your actual dashboard view
+});
 // Public routes
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 
@@ -27,8 +35,24 @@ Route::middleware('web')->group(function () {
 
     // Dashboard route (protected by auth middleware)
     Route::middleware(['auth'])->group(function () {
+        // Doctors
+        Route::resource('doctors', DoctorController::class);
+        // Users
+        Route::resource('users', UserController::class);
+
+        // Patients
+        Route::resource('patients', PatientController::class);
+
+        // Specialties
+        Route::resource('specialties', SpecialtyController::class);
+
+        // Appointments
+        Route::resource('appointments', AppointmentController::class);
+        // Sliders
+        Route::resource('sliders', SliderController::class);
+
         Route::get('/dashboard', function () {
-            return view('dashboard'); // Replace 'dashboard' with your actual dashboard view
+            return view('mainDashboard'); // Replace 'dashboard' with your actual dashboard view
         });
     });
 });
