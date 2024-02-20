@@ -37,7 +37,11 @@ class SliderController extends Controller
 
         return redirect()->route('sliders.index')->with('success', 'تم عمل السلايدر.');
     }
-
+    public function show($id)
+    {
+        $slider = Slider::findOrFail($id);
+        return view('sliders.show', compact('slider'));
+    }
     public function edit($id)
     {
         $slider = Slider::findOrFail($id);

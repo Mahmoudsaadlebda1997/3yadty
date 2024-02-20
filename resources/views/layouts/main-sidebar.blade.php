@@ -88,11 +88,11 @@
                                     الحجوزات
                                 </a>
                             </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('appointments.create') }}">
-                                إضافة حجز
-                            </a>
-                        </li>
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="{{ route('appointments.create') }}">--}}
+{{--                                إضافة حجز--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
                         @endif
                     @endauth
                     @auth

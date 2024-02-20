@@ -5,6 +5,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SpecialtyController;
+use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,13 +21,31 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome'); // Replace 'dashboard' with your actual dashboard view
+    return view('template.index'); // Replace 'dashboard' with your actual dashboard view
 });
+// Public routes for template
+Route::get('/template/login', [TemplateController::class, 'showLoginForm'])->name('loginTemplate');
+
+// Public routes for template
+Route::get('/template/register', [TemplateController::class, 'showRegisterForm'])->name('registerTemplate');
+// Public routes for template
+Route::post('/template/register', [TemplateController::class, 'store'])->name('storePatient');
 // Public routes
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 
 // Authenticated routes
 Route::middleware('web')->group(function () {
+
+    // Login Template routes
+    Route::post('/template/login', [TemplateController::class, 'login']);
+
+    // Logout Template route
+    Route::get('/logoutTemplate', [TemplateController::class, 'logout'])->name('logoutTemplate');
+
+
+    // Main Page Template routes
+    Route::get('/', [TemplateController::class, 'mainPage']);
+
     // Login routes
     Route::post('/login', [UserController::class, 'login']);
 
@@ -35,6 +54,10 @@ Route::middleware('web')->group(function () {
 
     // Dashboard route (protected by auth middleware)
     Route::middleware(['auth'])->group(function () {
+        // appointment for Patient route
+        Route::get('/template/appointment', [TemplateController::class, 'myAppointments'])->name('myAppointment');
+        // appointment for Patient route
+        Route::post('/template/appointment/store', [TemplateController::class, 'storeAppointment'])->name('storeAppointment');
         // Doctors
         Route::resource('doctors', DoctorController::class);
         // Users
